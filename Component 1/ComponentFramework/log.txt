@@ -1,2 +1,2 @@
-INFO: Initializing the window and first scene ( c:\users\erico\files\school\year 2\semester 1\game programming 5\componentframework3.0\componentframework\gamescenemanager.cpp: 91)
-INFO: 1.13.0 ( c:\users\erico\files\school\year 2\semester 1\game programming 5\componentframework3.0\componentframework\window.cpp: 66)
+INFO: Initializing the window and first scene ( c:\users\erico\documents\code\game-programming-5_assignment-1\component 1\componentframework\gamescenemanager.cpp: 91)
+INFO: 1.13.0 ( c:\users\erico\documents\code\game-programming-5_assignment-1\component 1\componentframework\window.cpp: 66)
