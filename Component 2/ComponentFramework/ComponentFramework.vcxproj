@@ -47,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\GameDev\SDL2-devel-2.0.7-VC\SDL2-2.0.7\include;C:\GameDev\glew-1.13.0-win32\glew-1.13.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\GameDev\glew-1.13.0-win32\glew-1.13.0\include;C:\GameDev\SDL2-devel-2.0.7-VC\SDL2-2.0.7\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
