@@ -5,6 +5,7 @@
 #include "MMath.h"
 #include "QuadSphere.h"
 #include "Model0.h"
+#include "Model1.h"
 #include "Trackball.h"
 
 using namespace GAME;
@@ -30,6 +31,9 @@ bool Scene0::OnCreate() {
 	model0 = new Model0();
 	model0->SetVel(Vec3(0.0f,0.0f,0.0f));
 	model0->SetPos(Vec3(0.0f,0.0f,0.0f));
+	model1 = new Model1();
+	model1->SetVel(Vec3(0.0f, 0.0f, 0.0f));
+	model1->SetPos(Vec3(0.0f, 1.0f, 0.0f));
 	return true;
 }
 
@@ -51,12 +55,15 @@ void Scene0::OnDestroy(){
 	/// Cleanup Assets
 	if(model0) delete model0;
 	model0 = nullptr;
+	if (model1) delete model0;
+	model1 = nullptr;
 	if(trackball) delete trackball;
 	trackball = nullptr;
 }
 
 void Scene0::Update(const float deltaTime){
 	model0->Update(deltaTime);	
+	model1->Update(deltaTime);
 }
 
 void Scene0::Render() const{

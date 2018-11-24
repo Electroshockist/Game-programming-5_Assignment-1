@@ -47,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\GameDev\glew-1.13.0-win32\glew-1.13.0\include;C:\GameDev\SDL2-devel-2.0.7-VC\SDL2-2.0.7\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\GameDev\SDL2-devel-2.0.7-VC\SDL2-2.0.7\include;C:\GameDev\glew-1.13.0-win32\glew-1.13.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -77,6 +77,7 @@
     <ClCompile Include="Model0.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MMath.cpp" />
+    <ClCompile Include="Model1.cpp" />
     <ClCompile Include="ObjLoader.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Scene0.cpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="Model0.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MMath.h" />
+    <ClInclude Include="Model1.h" />
     <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scene0.h" />

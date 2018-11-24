@@ -10,6 +10,7 @@ namespace GAME {
 	/// Forward casting
 	class Trackball;
 	class Model0;
+	class Model1;
 
 	class Scene0 : public Scene  {
 	protected:
@@ -35,6 +36,7 @@ namespace GAME {
 	private:
 		Vec3 lightPos;
 		Model0 *model0;
+		Model1 *model1;
 		Trackball *trackball;
 	
 	};
