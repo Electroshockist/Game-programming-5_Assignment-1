@@ -91,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
-    <ClInclude Include="Header.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="GameSceneManager.h" />
