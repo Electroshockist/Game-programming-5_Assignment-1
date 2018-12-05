@@ -51,9 +51,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Model0.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Trackball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,9 +58,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ObjLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MatrixStack.cpp">
@@ -110,9 +104,6 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Model0.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Trackball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -120,9 +111,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ObjLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Primitive.h">

@@ -10,6 +10,7 @@ class Primitive :public Model {
 public:
 	Primitive(GLenum drawmode_, std::vector<Vec3> *vertices_, std::vector<Vec3> *normals_, std::vector<Vec2> *uvs_);
 	Primitive(const char* filePath);
+	//Primitive(const char* filepath, Primitive* parent);
 
 	Primitive(const Primitive&) = delete;
 	Primitive(Primitive&&) = delete;
@@ -17,7 +18,7 @@ public:
 	Primitive& operator = (Primitive&&) = delete;
 
 	std::vector<Primitive> children;
-	Model* parent = nullptr;
+	Primitive* parent = nullptr;
 
 	virtual bool OnCreate();
 	virtual void OnDestroy();
@@ -32,6 +33,7 @@ public:
 	void move3D(const Vec3 direction, const float amount);
 	void scale2D(const float amount);
 	void scale3D(const Vec3 axis);
+	void addChild(Primitive* child);
 private:
 	GAME::Shader *shader;
 	GLuint vbo;

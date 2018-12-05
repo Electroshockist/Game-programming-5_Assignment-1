@@ -14,7 +14,8 @@ const float drawDistance = 100.0f;
 const float fieldOfView = 45.0f;
 const float nearClippingPlane = 1.0f;
 
-const std::string kTriangle0 = "Horn.obj";
+const std::string skull = "Skull.obj";
+const std::string horn = "Horn.obj";
 const float kScaleFactor = 1.05f;
 const float kMoveFactor = 0.25f;
 const float kRotationFactor = 5.0f;
@@ -37,7 +38,9 @@ bool Scene0::OnCreate() {
 
 	/// Load Assets: as needed 
 	lightPos = Vec3(10.0f, 3.0f, 10.0f);
-	sceneGraph->insert(std::make_pair(kTriangle0, new Primitive(kTriangle0.c_str())));
+
+	sceneGraph->insert(std::make_pair(skull, new Primitive(skull.c_str())));
+	sceneGraph->insert(std::make_pair(horn, new Primitive(horn.c_str())));
 
 	return true;
 }
@@ -64,7 +67,8 @@ void Scene0::OnDestroy(){
 
 void Scene0::Update(const float deltaTime){
 
-	Model* model = sceneGraph->at(kTriangle0);
+	Model* model = sceneGraph->at(skull);
+
 	model->Update(deltaTime);
 }
 
@@ -85,7 +89,7 @@ void Scene0::Render() const{
 }
 
 void Scene0::HandleEvents(const SDL_Event& SDLEvent){
-	auto triangle0 = sceneGraph->at(kTriangle0);
+	auto triangle0 = sceneGraph->at(skull);
 
 	if (SDLEvent.type == SDL_EventType::SDL_KEYDOWN) {
 		switch (SDLEvent.key.keysym.sym) {
