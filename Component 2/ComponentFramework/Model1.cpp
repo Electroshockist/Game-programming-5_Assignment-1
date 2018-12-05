@@ -12,7 +12,7 @@ Model1::Model1() :shader(nullptr) {
 
 bool Model1::OnCreate() {
 
-	ObjLoader obj("chair.obj");
+	ObjLoader obj("horn.obj");
 
 	meshes.push_back(new Mesh(GL_TRIANGLES, obj.vertices, obj.normals, obj.uvCoords));
 

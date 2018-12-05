@@ -69,6 +69,10 @@ void GameSceneManager::HandleEvents(){
 					currentScene->OnResize(SDLEvent.window.data1,SDLEvent.window.data2 );
 				}
 				break;
+			case SDL_EventType::SDL_KEYDOWN:
+				assert(currentScene);
+				currentScene->HandleEvents(SDLEvent);
+				break;
 			default:  
 				break;
 		}

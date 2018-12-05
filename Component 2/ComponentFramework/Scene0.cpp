@@ -4,15 +4,24 @@
 #include <iostream>
 #include "MMath.h"
 #include "QuadSphere.h"
-#include "Model0.h"
-#include "Model1.h"
+#include "Primitive.h"
 #include "Trackball.h"
 
 using namespace GAME;
 using namespace MATH;
 
-Scene0::Scene0(class Window& windowRef):  Scene(windowRef), model0(nullptr) { 
+const float drawDistance = 100.0f;
+const float fieldOfView = 45.0f;
+const float nearClippingPlane = 1.0f;
+
+const std::string kTriangle0 = "Horn.obj";
+const float kScaleFactor = 1.05f;
+const float kMoveFactor = 0.25f;
+const float kRotationFactor = 5.0f;
+
+Scene0::Scene0(class Window& windowRef):  Scene(windowRef){ 
 	trackball = new Trackball();
+	sceneGraph = std::make_unique<std::map<std::string, Model *>>(std::map<std::string, Model *>());
 	projectionMatrix.loadIdentity();
 	viewMatrix.loadIdentity();
 	glEnable(GL_DEPTH_TEST);
@@ -28,12 +37,8 @@ bool Scene0::OnCreate() {
 
 	/// Load Assets: as needed 
 	lightPos = Vec3(10.0f, 3.0f, 10.0f);
-	model0 = new Model0();
-	model0->SetVel(Vec3(0.0f,0.0f,0.0f));
-	model0->SetPos(Vec3(0.0f,0.0f,0.0f));
-	model1 = new Model1();
-	model1->SetVel(Vec3(0.0f, 0.0f, 0.0f));
-	model1->SetPos(Vec3(0.0f, 1.0f, 0.0f));
+	sceneGraph->insert(std::make_pair(kTriangle0, new Primitive(kTriangle0.c_str())));
+
 	return true;
 }
 
@@ -43,45 +48,71 @@ void Scene0::OnResize(int w_, int h_){
 	glViewport(0,0,windowPtr->GetWidth(),windowPtr->GetHeight());
 	float aspect = float(windowPtr->GetWidth()) / float(windowPtr->GetHeight());
 	
-	projectionMatrix = MMath::perspective(45.0f, aspect, 1.0f, 100.0f);
+	projectionMatrix = MMath::perspective(fieldOfView, aspect, nearClippingPlane, drawDistance);
 
 	viewMatrix = MMath::lookAt(Vec3(0.0f, 0.0f, 10.0f), 
 							   Vec3(0.0f, 0.0f, 0.0f), 
 							   Vec3(0.0f, 1.0f, 0.0f));
-	
 }
 
 void Scene0::OnDestroy(){
 	/// Cleanup Assets
-	if(model0) delete model0;
-	model0 = nullptr;
-	if (model1) delete model0;
-	model1 = nullptr;
+
 	if(trackball) delete trackball;
 	trackball = nullptr;
 }
 
 void Scene0::Update(const float deltaTime){
-	model0->Update(deltaTime);	
-	model1->Update(deltaTime);
+
+	Model* model = sceneGraph->at(kTriangle0);
+	model->Update(deltaTime);
 }
 
 void Scene0::Render() const{
 	/// Draw your scene here
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-	model0->SetLightPos(viewMatrix * lightPos);
-	model0->Render(projectionMatrix , trackball->GetMatrix4() *  viewMatrix, trackball->GetMatrix3());
+	glLoadIdentity();
+	/// draw code here
+
+	for (auto& pair : *sceneGraph) {
+		Model *model = pair.second;
+		model->SetLightPos(viewMatrix * lightPos);
+		model->Render(projectionMatrix, trackball->GetMatrix4() *  viewMatrix, trackball->GetMatrix3());
+	}
+	
+	/// swap double buffer
 	SDL_GL_SwapWindow(windowPtr->getSDLWindow());
 }
 
 void Scene0::HandleEvents(const SDL_Event& SDLEvent){
-	if(SDLEvent.type == SDL_EventType::SDL_MOUSEBUTTONDOWN){
-		trackball->OnLeftMouseDown(SDLEvent.button.x,SDLEvent.button.y);
+	auto triangle0 = sceneGraph->at(kTriangle0);
+
+	if (SDLEvent.type == SDL_EventType::SDL_KEYDOWN) {
+		switch (SDLEvent.key.keysym.sym) {
+		case SDLK_q:
+			triangle0->rotate2D(kRotationFactor);
+			break;
+		case SDLK_e:
+			triangle0->rotate2D(-kRotationFactor);
+			break;
+		case SDLK_w:
+			triangle0->move2D(0.0f, 1.0f * kMoveFactor);
+			break;
+		case SDLK_s:
+			triangle0->move2D(0.0f, -1.0f * kMoveFactor);
+			break;
+		case SDLK_a:
+			triangle0->move2D(-1.0f * kMoveFactor, 0.0f);
+			break;
+		case SDLK_d:
+			triangle0->move2D(1.0f * kMoveFactor, 0.0f);
+			break;
+		case SDLK_z:
+			triangle0->scale2D(kScaleFactor);
+			break;
+		case SDLK_x:
+			triangle0->scale2D(-kScaleFactor);
+			break;
+		}
 	}
-	if (SDLEvent.type == SDL_EventType::SDL_MOUSEMOTION && 
-		SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
-		trackball->OnMouseMove(SDLEvent.button.x,SDLEvent.button.y);
-	}
-	
-			
 }

@@ -5,8 +5,9 @@
 #include "Vector.h"
 #include "Matrix.h"
 
-
 using namespace MATH;
+
+const float kDefaultScaleFactor = 1.0f;
 
 class Mesh {
     public:

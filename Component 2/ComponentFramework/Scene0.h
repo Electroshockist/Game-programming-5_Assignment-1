@@ -3,14 +3,13 @@
 
 #include "Scene.h"
 #include "Window.h"
-
-
+#include <map>
+#include <memory>
 
 namespace GAME {
 	/// Forward casting
 	class Trackball;
-	class Model0;
-	class Model1;
+	class Model;
 
 	class Scene0 : public Scene  {
 	protected:
@@ -18,7 +17,6 @@ namespace GAME {
 	public:
 		explicit Scene0(Window& windowRef);
 		virtual ~Scene0();
-
 
 		/// Delete these possible default constructors and operators  
 		Scene0(const Scene0&) = delete;
@@ -35,10 +33,8 @@ namespace GAME {
 	
 	private:
 		Vec3 lightPos;
-		Model0 *model0;
-		Model1 *model1;
+		std::unique_ptr<std::map<std::string, Model *>> sceneGraph;
 		Trackball *trackball;
-	
 	};
 }
 #endif
