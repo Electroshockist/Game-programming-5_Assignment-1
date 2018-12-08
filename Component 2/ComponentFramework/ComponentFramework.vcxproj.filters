@@ -119,6 +119,12 @@
     <ClInclude Include="Quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Skull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Horn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="phongFrag.glsl">

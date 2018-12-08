@@ -15,14 +15,6 @@ Primitive::Primitive(const char* filepath) {
 	OnCreate();
 }
 
-//Primitive::Primitive(const char* filepath, Primitive* parent) {
-//	ObjLoader obj(filepath);
-//	this->parent = parent;
-//	parent->addChild(this);
-//	meshes.push_back(new Mesh(GL_TRIANGLES, obj.vertices, obj.normals, obj.uvCoords));
-//	OnCreate();
-//}
-
 Primitive::~Primitive() {
 
 }
@@ -53,6 +45,12 @@ Matrix4 Primitive::center() {
 
 	temp = temp / (first->vertices.size() * 1.0f);
 	return MMath::translate(-temp.x, -temp.y, -temp.z);
+}
+
+void Primitive::addChild(Primitive* child) {
+	children.push_back(child);
+	child->parent = this;
+
 }
 
 //void Primitive::addChild(Primitive* child) {
