@@ -3,8 +3,6 @@
 class Horn : public Primitive
 {
 public:
-	inline Horn() {
-		Primitive("horn.obj");
-	}
+	Horn() : Primitive("horn.obj") {}
 };
 

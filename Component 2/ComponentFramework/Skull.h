@@ -3,8 +3,6 @@
 class Skull : public Primitive
 {
 public:
-	inline Skull(){
-		Primitive("Skull.obj");
-	}
+	 Skull() : Primitive("skull.obj") {}
 };
 

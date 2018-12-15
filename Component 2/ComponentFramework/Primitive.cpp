@@ -72,10 +72,15 @@ void Primitive::Update(const float deltaTime) {
 }
 
 void Primitive::Render(const Matrix4& projectionMatrix, const Matrix4& viewMatrix, const Matrix3& normalMatrix) const {
+	Matrix4 resultModelMatrix;
+	if (parent != nullptr) {
+		resultModelMatrix = static_cast<Primitive*>(parent)->modelMatrix * modelMatrix;
+	}
+	else resultModelMatrix = modelMatrix;
 
 	glUseProgram(shader->getProgram());
 	glUniformMatrix4fv(projectionMatrixID, 1, GL_FALSE, projectionMatrix);
-	glUniformMatrix4fv(modelViewMatrixID, 1, GL_FALSE, viewMatrix *  modelMatrix * transformationMatrix);
+	glUniformMatrix4fv(modelViewMatrixID, 1, GL_FALSE, viewMatrix *  resultModelMatrix * transformationMatrix);
 	glUniformMatrix3fv(normalMatrixID, 1, GL_FALSE, normalMatrix);
 	glUniform3fv(lightPosID, 1, lightPos);
 	for (auto mesh : meshes) {

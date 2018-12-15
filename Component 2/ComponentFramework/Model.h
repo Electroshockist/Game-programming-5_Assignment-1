@@ -23,6 +23,8 @@ namespace GAME {
 		std::vector<Mesh*> meshes;
 	public:
 
+		void* parent = nullptr;
+
 		inline void SetPos(const Vec3& pos_) { pos = pos_; }
 		inline void SetVel(const Vec3& vel_) { vel = vel_; }
 

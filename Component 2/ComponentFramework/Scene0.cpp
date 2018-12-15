@@ -6,6 +6,8 @@
 #include "QuadSphere.h"
 #include "Primitive.h"
 #include "Trackball.h"
+#include "Skull.h"
+#include "Horn.h"
 
 using namespace GAME;
 using namespace MATH;
@@ -19,6 +21,8 @@ const std::string horn = "Horn.obj";
 const float kScaleFactor = 1.05f;
 const float kMoveFactor = 0.25f;
 const float kRotationFactor = 5.0f;
+Skull* skullModel = new Skull();
+Horn* hornModel = new Horn();
 
 Scene0::Scene0(class Window& windowRef):  Scene(windowRef){ 
 	trackball = new Trackball();
@@ -34,13 +38,15 @@ Scene0::~Scene0(){
 }
 
 bool Scene0::OnCreate() {
+	//hornModel->SetPos(Vec3(0, 10, 0));
+	//skullModel->addChild(hornModel);
 	OnResize(windowPtr->GetWidth(),windowPtr->GetHeight());
 
 	/// Load Assets: as needed 
 	lightPos = Vec3(10.0f, 3.0f, 10.0f);
 
-	sceneGraph->insert(std::make_pair(skull, new Primitive(skull.c_str())));
-	sceneGraph->insert(std::make_pair(horn, new Primitive(horn.c_str())));
+	sceneGraph->insert(std::make_pair(skull, skullModel));
+	sceneGraph->insert(std::make_pair(horn, hornModel));
 
 	return true;
 }
@@ -67,9 +73,12 @@ void Scene0::OnDestroy(){
 
 void Scene0::Update(const float deltaTime){
 
-	Model* model = sceneGraph->at(skull);
+	Model* modelSkull = sceneGraph->at(skull);
 
-	model->Update(deltaTime);
+	Model* modelHorn = sceneGraph->at(horn);
+
+	modelSkull->Update(deltaTime);
+	modelHorn->Update(deltaTime);
 }
 
 void Scene0::Render() const{
